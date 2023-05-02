@@ -1,6 +1,6 @@
 import { createTransport } from "nodemailer";
 
-async function sendVerificationRequest(params) {
+export async function sendVerificationRequest(params) {
   const { identifier, url, provider, theme } = params;
   const { host } = new URL(url);
   // NOTE: You are not required to use `nodemailer`, use whatever you want.
