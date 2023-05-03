@@ -1,7 +1,9 @@
 import NextAuth from "next-auth";
 import EmailProvider from "next-auth/providers/email";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 
-import { sendVerificationRequest } from "../../../lib/emails/send-verification";
+import clientPromise from "../../../lib/db/connection";
+// import { sendVerificationRequest } from "../../../lib/emails/send-verification";
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -19,6 +21,7 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
+  adapter: MongoDBAdapter(clientPromise),
 };
 
 export default NextAuth(authOptions);
