@@ -1,8 +1,18 @@
-import mongoose from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
 import { verifyPassword } from "../../passwords";
-const { Schema } = mongoose;
 
-const userSchema = new Schema({
+interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+interface UserModel extends Model<User> {
+  findByCredentials(email: string, password: string): User;
+}
+
+const userSchema = new Schema<User, UserModel>({
   firstName: {
     type: String,
     required: [true, "First name is required"],
@@ -22,32 +32,32 @@ const userSchema = new Schema({
 });
 
 // Add a custom function for verifying user credentials
-userSchema.statics.findByCredentials = async (
-  email: string,
-  password: string
-) => {
-  const user = await User.findOne({ email });
+userSchema.static(
+  "findByCredentials",
+  async function findByCredentials(email: string, password: string) {
+    const user = await this.findOne({ email });
 
-  //   If email doesn't exist throw an error
-  if (!user) {
-    throw new Error("Invalid Credentials");
+    //   If email doesn't exist throw an error
+    if (!user) {
+      throw new Error("Invalid Credentials");
+    }
+
+    // compare the password with the one in the DB
+    const match = await verifyPassword(password, user.password);
+
+    //   If passwords don't match throw an error
+    if (!match) {
+      throw new Error("Invalid Credentials");
+    }
+
+    const userObject = user.toObject();
+
+    //Remove user password from the returned string
+    delete userObject.password;
+    return userObject;
   }
+);
 
-  // compare the password with the one in the DB
-  const match = await verifyPassword(password, user.password);
-
-  //   If passwords don't match throw an error
-  if (!match) {
-    throw new Error("Invalid Credentials");
-  }
-
-  const userObject = user.toObject();
-
-  //Remove user password from the returned string
-  delete userObject.password;
-  return userObject;
-};
-
-const User = mongoose.models.User || mongoose.model("User", userSchema);
+const User = model<User, UserModel>("User", userSchema);
 
 export default User;
