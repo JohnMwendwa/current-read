@@ -9,7 +9,7 @@ const MONGO_URL =
     : process.env.MONGO_URL;
 
 // Throw an error if no database connection string is set
-if (!process.env.MONGODB_URI) {
+if (!MONGO_URL) {
   throw new Error('Invalid/Missing environment variable: "MONGODB_URI"'.bgRed);
 }
 
