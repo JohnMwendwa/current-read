@@ -1,8 +1,13 @@
-import mongoose from "mongoose";
+import { Schema, model, models, Document } from "mongoose";
 
-const { Schema } = mongoose;
+interface Book extends Document {
+  title: string;
+  author: string;
+  start: Date;
+  end?: Date;
+}
 
-const bookSchema = new Schema({
+const bookSchema = new Schema<Book>({
   title: {
     type: String,
     required: [true, "Book title is required"],
@@ -18,6 +23,6 @@ const bookSchema = new Schema({
   end: Date,
 });
 
-const Book = mongoose.models.Book || mongoose.model("Book", bookSchema);
+const Book = models.Book || model("Book", bookSchema);
 
 export default Book;
