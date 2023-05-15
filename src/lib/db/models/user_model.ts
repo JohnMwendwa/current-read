@@ -2,6 +2,7 @@ import { Model, Schema, model, models } from "mongoose";
 import { verifyPassword } from "../../passwords";
 
 interface User {
+  _id: Schema.Types.ObjectId;
   firstName: string;
   lastName: string;
   email: string;
