@@ -1,7 +1,7 @@
-import { Model, Schema, model, models } from "mongoose";
+import { Model, Schema, model, Document } from "mongoose";
 import { verifyPassword } from "../../passwords";
 
-interface User {
+interface User extends Document {
   _id: Schema.Types.ObjectId;
   firstName: string;
   lastName: string;
@@ -33,32 +33,37 @@ const userSchema = new Schema<User, UserModel>({
 });
 
 // Add a custom function for verifying user credentials
-userSchema.static(
-  "findByCredentials",
-  async function findByCredentials(email: string, password: string) {
-    const user = await this.findOne({ email });
+userSchema.statics.findByCredentials = async function (
+  email: string,
+  password: string
+) {
+  const user = await this.findOne({ email });
 
-    //   If email doesn't exist throw an error
-    if (!user) {
-      throw new Error("Invalid Credentials");
-    }
-
-    // compare the password with the one in the DB
-    const match = await verifyPassword(password, user.password);
-
-    //   If passwords don't match throw an error
-    if (!match) {
-      throw new Error("Invalid Credentials");
-    }
-
-    const userObject = user.toObject();
-
-    //Remove user password from the returned string
-    delete userObject.password;
-    return userObject;
+  //   If email doesn't exist throw an error
+  if (!user) {
+    throw new Error("Invalid Credentials");
   }
-);
 
-const User = model<User, UserModel>("User", userSchema);
+  // compare the password with the one in the DB
+  const match = await verifyPassword(password, user.password);
+
+  //   If passwords don't match throw an error
+  if (!match) {
+    throw new Error("Invalid Credentials");
+  }
+
+  const userObject = user.toObject();
+
+  //Remove user password from the returned string
+  delete userObject.password;
+  return userObject;
+};
+
+let User: UserModel;
+try {
+  User = model<User, UserModel>("User");
+} catch {
+  User = model<User, UserModel>("User", userSchema);
+}
 
 export default User;
