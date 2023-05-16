@@ -8,7 +8,7 @@ const AddBookForm = () => {
   const addNewBook = async (e: FormEvent) => {
     e.preventDefault();
 
-    const res = await fetch("/api/book/new", {
+    const res = await fetch("/api/books/new", {
       method: "POST",
       body: JSON.stringify({
         title,
