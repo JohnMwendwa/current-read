@@ -1,1 +1,25 @@
+import React from "react";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
 
+const AdminPage = () => {
+  const { data: session, status } = useSession({ required: true });
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      <Link
+        href="/admin/new-book"
+        className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
+      >
+        <span className="text-2xl mr-2">+</span>
+        Add New Book
+      </Link>
+    </div>
+  );
+};
+
+export default AdminPage;
