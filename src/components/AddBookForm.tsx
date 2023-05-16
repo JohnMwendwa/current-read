@@ -1,8 +1,35 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 const AddBookForm = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  const addNewBook = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const res = await fetch("/api/book/new", {
+      method: "POST",
+      body: JSON.stringify({
+        title,
+        author,
+      }),
+      headers: {
+        "Content-Type": "appication/json",
+      },
+    });
+    const data = await res.json();
+
+    if (data.error) {
+      setError(data.error);
+      return;
+    } else {
+      setMessage(data.message);
+      return;
+    }
+  };
+
   return (
     <form className=" flex-1 flex flex-col items-center justify-center w-full">
       <label htmlFor="title" className="max-w-sm w-full">
@@ -28,6 +55,7 @@ const AddBookForm = () => {
       <button
         type="submit"
         className="max-w-sm w-full bg-green-600 text-white px-4 py-2 rounded-md"
+        onClick={addNewBook}
       >
         Add New Book
       </button>
