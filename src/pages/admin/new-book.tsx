@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const NewBookPage = () => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center justify-center">
       <AddBookForm />
       <div className="mt-auto">
         <Link
