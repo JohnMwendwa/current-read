@@ -1,10 +1,9 @@
 import { FormEvent, useState } from "react";
+import { toast } from "react-toastify";
 
 const AddBookForm = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
 
   const addNewBook = async (e: FormEvent) => {
     e.preventDefault();
@@ -16,16 +15,34 @@ const AddBookForm = () => {
         author,
       }),
       headers: {
-        "Content-Type": "appication/json",
+        "Content-Type": "application/json",
       },
     });
     const data = await res.json();
 
     if (data.error) {
-      setError(data.error);
+      toast.error(data.error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       return;
     } else {
-      setMessage(data.message);
+      toast.success(data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       return;
     }
   };
