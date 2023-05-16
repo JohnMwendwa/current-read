@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import BookList from "components/BookList";
 
 const AdminPage = () => {
   const { data: session, status } = useSession({ required: true });
@@ -18,6 +19,8 @@ const AdminPage = () => {
         <span className="text-2xl mr-2">+</span>
         Add New Book
       </Link>
+
+      <BookList />
     </div>
   );
 };
