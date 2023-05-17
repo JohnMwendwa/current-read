@@ -3,6 +3,7 @@ import { FaEdit, FaTrash, FaCheckSquare } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { getDay, getYear } from "utils/format_date";
 
 const BookCard = ({ _id, title, author, start, end }) => {
   const { status } = useSession();
@@ -87,19 +88,20 @@ const BookCard = ({ _id, title, author, start, end }) => {
     <div className="border rounded-md p-4 w-full">
       <div className="flex items-center justify-between">
         <h2 className="font-bold text-2xl">{title}</h2>
-        <span className="font-mono">2023</span>
+        <span className="font-mono">{getYear(start)}</span>
       </div>
       <p>
         <span className="font-medium text-sm">author :</span> {author}
       </p>
       <div className="flex justify-between font-mono">
         <p>
-          Start: <span className="font-bold text-blue-400">{start}</span>
+          Start:{" "}
+          <span className="font-bold text-blue-400">{getDay(start)}</span>
         </p>
         <p>
           Finish:{" "}
           {end ? (
-            <span className="font-bold text-blue-400">{end}</span>
+            <span className="font-bold text-blue-400">{getDay(end)}</span>
           ) : (
             <span className="bg-blue-400 text-white px-2 rounded-md py-1 text-sm">
               Current Read
