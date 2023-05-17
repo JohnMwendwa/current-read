@@ -2,9 +2,11 @@ import React from "react";
 import { FaEdit, FaTrash, FaCheckSquare } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const BookCard = ({ _id, title, author, start, end }) => {
   const { status } = useSession();
+  const router = useRouter();
 
   const handleDeleteBook = async () => {
     const res = await fetch("/api/books/update", {
@@ -39,6 +41,7 @@ const BookCard = ({ _id, title, author, start, end }) => {
         progress: undefined,
         theme: "colored",
       });
+      router.reload();
       return;
     }
   };
@@ -75,6 +78,7 @@ const BookCard = ({ _id, title, author, start, end }) => {
         progress: undefined,
         theme: "colored",
       });
+      router.reload();
       return;
     }
   };
@@ -95,7 +99,7 @@ const BookCard = ({ _id, title, author, start, end }) => {
         <p>
           Finish:{" "}
           {end ? (
-            <span className="font-bold text-blue-400">223-12-5</span>
+            <span className="font-bold text-blue-400">{end}</span>
           ) : (
             <span className="bg-blue-400 text-white px-2 rounded-md py-1 text-sm">
               Current Read
