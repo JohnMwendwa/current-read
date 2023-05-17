@@ -1,4 +1,4 @@
-import { Model, Schema, model, Document } from "mongoose";
+import { Model, Schema, model, models, Document } from "mongoose";
 import { verifyPassword } from "../../passwords";
 
 interface User extends Document {
@@ -59,11 +59,8 @@ userSchema.statics.findByCredentials = async function (
   return userObject;
 };
 
-let User: UserModel;
-try {
-  User = model<User, UserModel>("User");
-} catch {
-  User = model<User, UserModel>("User", userSchema);
-}
+const User =
+  (models.User as unknown as UserModel) ||
+  model<User, UserModel>("User", userSchema);
 
 export default User;
