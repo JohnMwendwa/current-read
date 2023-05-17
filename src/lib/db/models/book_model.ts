@@ -1,13 +1,16 @@
-import { Schema, model, models, Document } from "mongoose";
+import { Schema, model, Document, models, Model } from "mongoose";
 
-interface Book extends Document {
+interface BookProps extends Document {
+  _id: Schema.Types.ObjectId;
   title: string;
   author: string;
   start: Date;
   end?: Date;
 }
 
-const bookSchema = new Schema<Book>({
+interface BookModel extends Model<BookProps> {}
+
+const bookSchema = new Schema<BookProps, BookModel>({
   title: {
     type: String,
     required: [true, "Book title is required"],
@@ -23,6 +26,8 @@ const bookSchema = new Schema<Book>({
   end: Date,
 });
 
-const Book = models.Book || model("Book", bookSchema);
+const Book =
+  (models.Book as unknown as BookModel) ||
+  model<BookProps, BookModel>("Book", bookSchema);
 
 export default Book;
