@@ -18,7 +18,7 @@ const BookList = () => {
     setBooks(data.books);
   };
   return (
-    <div>
+    <div className="max-w-3xl w-full grid gap-5">
       {books.map((book) => {
         return <BookCard key={book._id} {...book} />;
       })}
