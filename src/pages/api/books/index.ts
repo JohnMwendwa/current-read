@@ -10,7 +10,7 @@ const handler = async (req, res) => {
   }
   try {
     await connectDB();
-    const books = await Book.find({});
+    const books = await Book.find({}).sort({ start: -1 });
 
     res.status(200).json({
       books,
