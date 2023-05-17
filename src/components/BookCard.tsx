@@ -1,7 +1,84 @@
 import React from "react";
 import { FaEdit, FaTrash, FaCheckSquare } from "react-icons/fa";
+import { useSession } from "next-auth/react";
+import { toast } from "react-toastify";
 
-const BookCard = ({ title, author, start, end, edit }) => {
+const BookCard = ({ _id, title, author, start, end }) => {
+  const { status } = useSession();
+
+  const handleDeleteBook = async () => {
+    const res = await fetch("/api/books/update", {
+      method: "DELETE",
+      body: JSON.stringify({ id: _id }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+
+    if (data.error) {
+      toast.error(data.error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return;
+    } else {
+      toast.success(data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return;
+    }
+  };
+  const handleCompleteBook = async () => {
+    const res = await fetch("/api/books/update", {
+      method: "PATCH",
+      body: JSON.stringify({ id: _id }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+
+    if (data.error) {
+      toast.error(data.error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return;
+    } else {
+      toast.success(data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return;
+    }
+  };
+
   return (
     <div className="border rounded-md p-4 w-full">
       <div className="flex items-center justify-between">
@@ -26,16 +103,22 @@ const BookCard = ({ title, author, start, end, edit }) => {
           )}
         </p>
       </div>
-      {edit && (
+      {status === "authenticated" && (
         <div className="flex justify-start border-t-2 pt-3 mt-4 text-xl">
           <span className="mr-4" title="edit book">
             <FaEdit className="text-blue-400 cursor-pointer" />
           </span>
           <span className="mr-4" title="delete book">
-            <FaTrash className="text-red-600 cursor-pointer" />
+            <FaTrash
+              className="text-red-600 cursor-pointer"
+              onClick={handleDeleteBook}
+            />
           </span>
           <span title="mark as complete">
-            <FaCheckSquare className="text-green-600 cursor-pointer" />
+            <FaCheckSquare
+              className="text-green-600 cursor-pointer"
+              onClick={handleCompleteBook}
+            />
           </span>
         </div>
       )}
