@@ -8,9 +8,7 @@ interface BookProps extends Document {
   end?: Date;
 }
 
-interface BookModel extends Model<BookProps> {}
-
-const bookSchema = new Schema<BookProps, BookModel>({
+const bookSchema = new Schema<BookProps>({
   title: {
     type: String,
     required: [true, "Book title is required"],
@@ -27,7 +25,7 @@ const bookSchema = new Schema<BookProps, BookModel>({
 });
 
 const Book =
-  (models.Book as unknown as BookModel) ||
-  model<BookProps, BookModel>("Book", bookSchema);
+  (models.Book as unknown as Model<BookProps>) ||
+  model<BookProps>("Book", bookSchema);
 
 export default Book;
