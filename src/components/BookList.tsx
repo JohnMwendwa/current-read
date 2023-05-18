@@ -18,11 +18,19 @@ const BookList = () => {
     setBooks(data.books);
   };
   return (
-    <div className="max-w-3xl w-full grid gap-5">
-      {books.map((book) => {
-        return <BookCard key={book._id} {...book} />;
-      })}
-    </div>
+    <>
+      {books.length ? (
+        <div className="max-w-3xl w-full grid gap-5">
+          {books.map((book) => {
+            return <BookCard key={book._id} {...book} />;
+          })}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center w-full flex-1 text-2xl text-red-600 font-bold font-mono">
+          User is Very Lazy!
+        </div>
+      )}
+    </>
   );
 };
 
