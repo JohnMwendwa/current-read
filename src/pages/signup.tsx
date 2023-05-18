@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSession, signIn } from "next-auth/react";
+import { toast } from "react-toastify";
 
 async function createUser(
   firstName: string,
@@ -38,7 +38,6 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
@@ -60,13 +59,31 @@ export default function Signup() {
 
     if (firstName.trim().length < 2 || lastName.trim().length < 2) {
       setLoading(false);
-      setError("A name should have more than two characters");
+      toast.error("A name should have more than two characters", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       return;
     }
 
     if (password !== confirmPassword) {
       setLoading(false);
-      setError("Passwords don't match!");
+      toast.error("Passwords don't match!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       return;
     }
 
@@ -80,15 +97,22 @@ export default function Signup() {
       });
     } catch (e) {
       setLoading(false);
-      setError(e.message);
+      toast.error(e.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   };
 
   return (
     <div className="flex flex-col justify-center items-center">
       <h2 className="mb-3 uppercase text-4xl font-bold">Signup</h2>
-
-      {error && <div>{error}</div>}
 
       <form onSubmit={handleSubmit} className="max-w-sm">
         <input
