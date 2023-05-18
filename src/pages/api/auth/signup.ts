@@ -36,6 +36,13 @@ export default async function handler(req, res) {
     });
   }
 
+  // Only allow myself to create an account
+  if (email !== "dev.johnmwendwa@gmail.com") {
+    return res.status(401).json({
+      error: "Sorry, this is a personal project for now!",
+    });
+  }
+
   try {
     await connectDB();
 
