@@ -85,7 +85,7 @@ const BookCard = ({ _id, title, author, start, end }) => {
   };
 
   return (
-    <div className="border rounded-md p-4 w-full">
+    <div className="border-2 rounded-md p-4 w-full">
       <div className="flex items-center justify-between">
         <h2 className="font-bold text-2xl">{title}</h2>
         <span className="font-mono">{getYear(start)}</span>
@@ -93,7 +93,10 @@ const BookCard = ({ _id, title, author, start, end }) => {
       <p>
         <span className="font-medium text-sm">author :</span> {author}
       </p>
-      <div className="flex justify-between font-mono">
+      <div
+        className="flex justify-between flex-col
+       font-mono sm:flex-row"
+      >
         <p>
           Start:{" "}
           <span className="font-bold text-blue-400">{getDay(start)}</span>
