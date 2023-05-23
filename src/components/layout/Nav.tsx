@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
+
 const Nav = () => {
   const { data: session } = useSession();
   return (
@@ -8,14 +9,19 @@ const Nav = () => {
       <Link href="/" className="font-extrabold text-2xl">
         JM
       </Link>
-      <nav className="flex items-center">
+      <nav className="flex items-center space-x-4">
         {session?.user ? (
-          <button
-            onClick={() => signOut()}
-            className="bg-red-600 px-4 py-2 rounded-lg hover:bg-red-700"
-          >
-            Logout
-          </button>
+          <>
+            <Link href="/admin" className="hover:text-gray-200">
+              Admin
+            </Link>
+            <button
+              onClick={() => signOut()}
+              className="bg-red-600 px-3 py-1 rounded-lg hover:bg-red-700"
+            >
+              Logout
+            </button>
+          </>
         ) : (
           <button
             onClick={() => signIn()}
