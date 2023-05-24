@@ -14,12 +14,25 @@ const EditBookForm = ({ id, title, author }: EditBookFormProps) => {
   const handleBookEdit = async (e: FormEvent) => {
     e.preventDefault();
 
-    const res = await fetch("/api/books/edit", {
+    if (!bookTitle.trim() || !bookAuthor.trim()) {
+      return toast.error("Book title or author cannot be empty", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+
+    const res = await fetch("/api/books/update", {
       method: "POST",
       body: JSON.stringify({
         id,
-        title,
-        author,
+        bookTitle,
+        bookAuthor,
       }),
       headers: {
         "Content-Type": "application/json",
