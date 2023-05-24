@@ -33,6 +33,10 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+
+  pages: {
+    error: "/api/auth/signin",
+  },
 };
 
 export default NextAuth(authOptions);
