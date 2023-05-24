@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { FaEdit, FaTrash, FaCheckSquare } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
@@ -115,7 +116,9 @@ const BookCard = ({ _id, title, author, start, end }) => {
       {status === "authenticated" && (
         <div className="flex justify-start border-t-2 pt-3 mt-4 text-xl">
           <span className="mr-4" title="edit book">
-            <FaEdit className="text-blue-400 cursor-pointer" />
+            <Link href={`/admin/${_id}/edit`}>
+              <FaEdit className="text-blue-400 cursor-pointer" />
+            </Link>
           </span>
           <span className="mr-4" title="delete book">
             <FaTrash
