@@ -89,7 +89,7 @@ const BookCard = ({ _id, title, author, start, end }) => {
     <div className="border-2 rounded-md p-4 w-full relative">
       <div className="flex items-center justify-between">
         <h2 className="font-bold text-xl sm:text-2xl">{title}</h2>
-        <span className="font-mono absolute top-0 right-0 bg-black text-white pl-3 pr-1 rounded-tr-md rounded-bl-full">
+        <span className="font-mono absolute top-0 right-0 bg-black text-white pl-3 pr-1 rounded-tr-md rounded-bl-3xl text-sm">
           {getYear(start)}
         </span>
       </div>
