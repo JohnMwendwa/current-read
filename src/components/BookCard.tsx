@@ -86,28 +86,30 @@ const BookCard = ({ _id, title, author, start, end }) => {
   };
 
   return (
-    <div className="border-2 rounded-md p-4 w-full">
+    <div className="border-2 rounded-md p-4 w-full relative">
       <div className="flex items-center justify-between">
-        <h2 className="font-bold text-2xl">{title}</h2>
-        <span className="font-mono">{getYear(start)}</span>
+        <h2 className="font-bold text-xl sm:text-2xl">{title}</h2>
+        <span className="font-mono absolute top-0 right-0 bg-black text-white pl-3 pr-1 rounded-tr-md rounded-bl-full">
+          {getYear(start)}
+        </span>
       </div>
-      <p>
-        <span className="font-medium text-sm">author :</span> {author}
+      <p className="text-sm">
+        <span className="font-medium">author :</span> {author}
       </p>
       <div
         className="flex justify-between flex-col
        font-mono sm:flex-row"
       >
-        <p>
+        <p className="text-sm">
           Start:{" "}
           <span className="font-bold text-blue-400">{getDay(start)}</span>
         </p>
-        <p>
+        <p className="text-sm">
           Finish:{" "}
           {end ? (
             <span className="font-bold text-blue-400">{getDay(end)}</span>
           ) : (
-            <span className="bg-blue-400 text-white px-2 rounded-md py-1 text-sm">
+            <span className="bg-blue-400 text-white px-1 rounded-m  text-sm">
               Current Read
             </span>
           )}
