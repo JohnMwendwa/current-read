@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth/next";
 import { NextApiRequest, NextApiResponse } from "next";
+import { Types } from "mongoose";
 
 import connectDB from "lib/db/connection";
 import Book from "lib/db/models/book_model";
@@ -27,6 +28,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return;
       }
 
+      // Chec if it is a valid id
+      if (!Types.ObjectId.isValid(id)) {
+        return res.status(404).json({
+          error: "Book Not Found!",
+        });
+      }
+
       await connectDB();
 
       // Find and delete book
@@ -51,10 +59,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return;
       }
 
+      // Chec if it is a valid id
+      if (!Types.ObjectId.isValid(id)) {
+        return res.status(404).json({
+          error: "Book Not Found!",
+        });
+      }
+
       await connectDB();
 
       // Update book finish date
-      const book = await Book.findOne({ id });
+      const book = await Book.findById(id);
       book.end = new Date();
       await book.save();
 
