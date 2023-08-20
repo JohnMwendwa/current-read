@@ -3,10 +3,10 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="text-center p-4 bg-gray-400">
+    <footer className="text-center p-4">
       <p>
-        &copy; {new Date().getFullYear()}{" "}
-        <Link href={"https://johnmwendwa.me"}>John Mwendwa</Link>
+        &copy; <Link href={"https://johnmwendwa.me"}>John Mwendwa</Link>
+        <span className="text-sm ml-1">{new Date().getFullYear()}</span>
       </p>
     </footer>
   );
