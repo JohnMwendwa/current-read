@@ -10,6 +10,12 @@ const Nav = () => {
         JM
       </Link>
       <nav className="flex items-center space-x-4">
+        <Link
+          href={"/wish-list"}
+          className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200"
+        >
+          Wish
+        </Link>
         {session?.user ? (
           <>
             <Link href="/admin" className="hover:text-gray-200">
