@@ -17,7 +17,38 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  if (req.method === "PATCH") {
+  if (req.method === "DELETE") {
+    try {
+      // Check if book id is provided
+      const { id } = req.body;
+      if (!id) {
+        res.status(422).json({
+          error: "Unprocessable request 😎",
+        });
+        return;
+      }
+
+      // Chec if it is a valid id
+      if (!Types.ObjectId.isValid(id)) {
+        return res.status(404).json({
+          error: "Book Not Found!",
+        });
+      }
+
+      await connectDB();
+
+      // Find and delete book
+      await Wish.findByIdAndDelete(id);
+
+      return res.status(201).json({
+        message: "Book deleted successfully",
+      });
+    } catch (e) {
+      res.status(500).json({
+        error: e.message,
+      });
+    }
+  } else if (req.method === "PATCH") {
     try {
       // Check if book id is provided
       const { id } = req.body;
