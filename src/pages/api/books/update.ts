@@ -70,7 +70,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       // Update book finish date
       const book = await Book.findById(id);
-      book.end = new Date();
+      book.end ? (book.end = null) : (book.end = new Date());
       await book.save();
 
       return res.status(201).json({
