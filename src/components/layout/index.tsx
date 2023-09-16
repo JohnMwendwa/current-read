@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
     <div className="flex flex-col min-h-screen dynamic">
       <Nav />
       <ToastContainer />
-      <main className="grid flex-1 p-4">{children}</main>
+      <main className="grid flex-1 p-4 mt-16">{children}</main>
       <Footer />
     </div>
   );
