@@ -1,6 +1,6 @@
 import { Schema, model, Document, models, Model } from "mongoose";
 
-interface WishProps extends Document {
+export interface WishProps extends Document {
   _id: Schema.Types.ObjectId;
   title: string;
   author: string;
