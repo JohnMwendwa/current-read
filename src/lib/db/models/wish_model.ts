@@ -16,11 +16,14 @@ const wishSchema = new Schema<WishProps>({
     type: String,
     required: [true, "Book author is required"],
   },
-  finished: false,
+  finished: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const Wish =
   (models.Wish as unknown as Model<WishProps>) ||
-  model<WishProps>("Book", wishSchema);
+  model<WishProps>("Wish", wishSchema);
 
 export default Wish;
