@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { FaEdit, FaTrash, FaCheckSquare } from "react-icons/fa";
+import { FaEdit, FaTrash, FaCheckSquare, FaRegSquare } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
@@ -119,20 +119,21 @@ const BookCard = ({ _id, title, author, start, end }) => {
         <div className="flex justify-start border-t-2 pt-3 mt-4 text-xl">
           <span className="mr-4" title="edit book">
             <Link href={`/admin/${_id}/edit`}>
-              <FaEdit className="text-blue-400 cursor-pointer" />
+              <FaEdit className="text-blue-400 cursor-pointer text-2xl" />
             </Link>
           </span>
           <span className="mr-4" title="delete book">
             <FaTrash
-              className="text-red-600 cursor-pointer"
+              className="text-red-600 cursor-pointer text-2xl"
               onClick={handleDeleteBook}
             />
           </span>
-          <span title="mark as complete">
-            <FaCheckSquare
-              className="text-green-600 cursor-pointer"
-              onClick={handleCompleteBook}
-            />
+          <span title="mark as complete" onClick={handleCompleteBook}>
+            {end ? (
+              <FaCheckSquare className="text-green-600 cursor-pointer text-2xl" />
+            ) : (
+              <FaRegSquare className="text-green-600 cursor-pointer text-2xl" />
+            )}
           </span>
         </div>
       )}
