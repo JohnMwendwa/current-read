@@ -98,11 +98,11 @@ const WishList = () => {
     );
   } else {
     return (
-      <div className="flex flex-col flex-1 gap-2">
+      <div className="flex flex-col flex-1 gap-4">
         {status === "authenticated" && (
           <form
             onSubmit={handleSubmit}
-            className="w-full gap-2 flex flex-col sm:flex-row flex-wrap items-center justify-center"
+            className="w-full gap-3 flex flex-col sm:flex-row flex-wrap items-center justify-center text-black"
           >
             <input
               type="text"
@@ -122,14 +122,14 @@ const WishList = () => {
             />
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-1 rounded-md"
+              className="bg-blue-700 text-white px-4 py-1 rounded-md"
             >
               Add New
             </button>
           </form>
         )}
         {wishes.length > 0 ? (
-          <div className="max-w-3xl w-full mx-auto grid gap-2">
+          <div className="max-w-3xl w-full mx-auto grid gap-3 text-black">
             {wishes.map((book, idx) => {
               return <Wish key={book._id} {...book} idx={idx} />;
             })}
