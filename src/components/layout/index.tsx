@@ -6,7 +6,7 @@ import Footer from "./Footer";
 
 const Layout = ({ children }) => {
   return (
-    <div className="flex flex-col min-h-screen dynamic bg-gray-100">
+    <div className="flex flex-col min-h-screen dynamic bg-primary text-white">
       <Nav />
       <ToastContainer />
       <main className="grid flex-1 p-4 mt-16">{children}</main>

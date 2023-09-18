@@ -184,21 +184,21 @@ const Wish = ({ _id, title, author, finished, idx }: Props) => {
             <span className="flex items-center gap-2">
               <span className="cursor-pointer" onClick={handleCompleteWish}>
                 {finished ? (
-                  <FaCheckSquare className="text-2xl text-blue-500 group-even:text-gray-500" />
+                  <FaCheckSquare className="text-2xl text-blue-700 group-even:text-gray-500" />
                 ) : (
-                  <FaRegSquare className="text-2xl text-blue-500 group-even:text-gray-500" />
+                  <FaRegSquare className="text-2xl text-blue-700 group-even:text-gray-600" />
                 )}
               </span>
               <span>
                 <FaEdit
                   onClick={handleEdit}
-                  className="text-2xl text-green-500 group-even:text-green-400 cursor-pointer"
+                  className="text-2xl text-green-600 cursor-pointer"
                 />
               </span>
               <span>
                 <FaTrash
                   onClick={handleDelete}
-                  className="text-2xl text-red-500 cursor-pointer"
+                  className="text-2xl text-red-600 cursor-pointer"
                 />
               </span>
             </span>

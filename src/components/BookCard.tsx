@@ -86,10 +86,10 @@ const BookCard = ({ _id, title, author, start, end }) => {
   };
 
   return (
-    <div className="border-2 border-black/20 rounded-md p-4 w-full relative shadow-sm  shadow-gray-900/75">
+    <div className="border-2 border-secondary/30 rounded-md p-4 w-full relative shadow-md  shadow-gray-900/75">
       <div className="flex items-center justify-between">
         <h2 className="font-bold text-xl sm:text-2xl">{title}</h2>
-        <span className="font-mono absolute top-0 right-0 bg-black text-white pl-3 pr-1 rounded-tr rounded-bl-2xl text-sm">
+        <span className="font-mono absolute top-0 right-0 bg-secondary text-white pl-3 pr-1 rounded-tr rounded-bl-2xl text-sm">
           {getYear(start)}
         </span>
       </div>
@@ -109,14 +109,14 @@ const BookCard = ({ _id, title, author, start, end }) => {
           {end ? (
             <span className="font-bold text-blue-400">{getDay(end)}</span>
           ) : (
-            <span className="bg-blue-400 text-white px-1 rounded-m  text-sm">
+            <span className="bg-orange text-white px-1 rounded-m  text-sm">
               Current Read
             </span>
           )}
         </p>
       </div>
       {status === "authenticated" && (
-        <div className="flex justify-start border-t-2 pt-3 mt-4 text-xl">
+        <div className="flex justify-start border-t-2 border-secondary/75 pt-3 px-4 mt-4 -mx-4 text-xl">
           <span className="mr-4" title="edit book">
             <Link href={`/admin/${_id}/edit`}>
               <FaEdit className="text-blue-400 cursor-pointer text-2xl" />
@@ -130,9 +130,9 @@ const BookCard = ({ _id, title, author, start, end }) => {
           </span>
           <span title="mark as complete" onClick={handleCompleteBook}>
             {end ? (
-              <FaCheckSquare className="text-green-600 cursor-pointer text-2xl" />
+              <FaCheckSquare className="text-green-400 cursor-pointer text-2xl" />
             ) : (
-              <FaRegSquare className="text-green-600 cursor-pointer text-2xl" />
+              <FaRegSquare className="text-green-400 cursor-pointer text-2xl" />
             )}
           </span>
         </div>
