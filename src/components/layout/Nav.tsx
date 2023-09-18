@@ -5,7 +5,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 const Nav = () => {
   const { data: session } = useSession();
   return (
-    <header className="flex justify-between items-center px-6 py-4 bg-blue-700/80 text-white shadow-xl backdrop-blur-sm fixed top-0 right-0 left-0     z-10">
+    <header className="flex justify-between items-center px-6 py-4 bg-secondary text-white shadow-xl backdrop-blur-sm fixed top-0 right-0 left-0     z-10">
       <Link href="/" className="font-extrabold text-2xl">
         JM
       </Link>
