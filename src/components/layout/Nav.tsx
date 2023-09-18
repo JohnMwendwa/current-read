@@ -34,7 +34,7 @@ const Nav = () => {
         ) : (
           <button
             onClick={() => signIn()}
-            className="bg-gray-900 px-4 py-2 rounded-lg hover:bg-cyan-900"
+            className="bg-blue-700 px-4 py-2 rounded-lg hover:bg-blue-600"
           >
             Login
           </button>
