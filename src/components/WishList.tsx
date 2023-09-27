@@ -122,7 +122,7 @@ const WishList = () => {
             />
             <button
               type="submit"
-              className="bg-blue-700 text-white px-4 py-1 rounded-md"
+              className="bg-blue-700 hover:bg-blue-600 text-white px-4 py-1 rounded-md"
             >
               Add New
             </button>
