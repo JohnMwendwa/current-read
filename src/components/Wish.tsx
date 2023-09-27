@@ -159,14 +159,14 @@ const Wish = ({ _id, title, author, finished, idx }: Props) => {
           <span>
             <button
               type="submit"
-              className="bg-green-500 px-4 py-1 rounded-md mr-2"
+              className="bg-green-500 hover:bg-green-400 px-4 py-1 rounded-md mr-2 text-white"
             >
               Update
             </button>
             <button
               type="button"
               onClick={handleEdit}
-              className="bg-red-500 px-4 py-1 rounded-md text-white"
+              className="bg-red-500 hover:bg-red-400 px-4 py-1 rounded-md text-white"
             >
               cancel
             </button>
@@ -184,21 +184,21 @@ const Wish = ({ _id, title, author, finished, idx }: Props) => {
             <span className="flex items-center gap-2">
               <span className="cursor-pointer" onClick={handleCompleteWish}>
                 {finished ? (
-                  <FaCheckSquare className="text-2xl text-blue-700 group-even:text-gray-500" />
+                  <FaCheckSquare className="text-2xl text-blue-700 hover:text-blue-500 group-even:text-gray-500 group-even:hover:text-gray-400" />
                 ) : (
-                  <FaRegSquare className="text-2xl text-blue-700 group-even:text-gray-600" />
+                  <FaRegSquare className="text-2xl text-blue-700 hover:text-blue-500 group-even:text-gray-600 group-even:hover:text-gray-400" />
                 )}
               </span>
               <span>
                 <FaEdit
                   onClick={handleEdit}
-                  className="text-2xl text-green-600 cursor-pointer"
+                  className="text-2xl text-green-600 hover:text-green-500 cursor-pointer"
                 />
               </span>
               <span>
                 <FaTrash
                   onClick={handleDelete}
-                  className="text-2xl text-red-600 cursor-pointer"
+                  className="text-2xl text-red-600 hover:text-red-500 cursor-pointer"
                 />
               </span>
             </span>
