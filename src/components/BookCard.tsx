@@ -119,20 +119,26 @@ const BookCard = ({ _id, title, author, start, end }) => {
         <div className="flex justify-start border-t-2 border-secondary/75 pt-3 px-4 mt-4 -mx-4 text-xl">
           <span className="mr-4" title="edit book">
             <Link href={`/admin/${_id}/edit`}>
-              <FaEdit className="text-blue-400 cursor-pointer text-2xl" />
+              <FaEdit className="text-blue-400 hover:text-blue-300 cursor-pointer text-2xl" />
             </Link>
           </span>
           <span className="mr-4" title="delete book">
             <FaTrash
-              className="text-red-600 cursor-pointer text-2xl"
+              className="text-red-600 hover:text-red-500 cursor-pointer text-2xl"
               onClick={handleDeleteBook}
             />
           </span>
-          <span title="mark as complete" onClick={handleCompleteBook}>
+          <span onClick={handleCompleteBook}>
             {end ? (
-              <FaCheckSquare className="text-green-400 cursor-pointer text-2xl" />
+              <FaCheckSquare
+                title="mark as incomplete"
+                className="text-green-400 hover:text-green-300 cursor-pointer text-2xl"
+              />
             ) : (
-              <FaRegSquare className="text-green-400 cursor-pointer text-2xl" />
+              <FaRegSquare
+                title="mark as complete"
+                className="text-green-400 hover:text-green-300 cursor-pointer text-2xl"
+              />
             )}
           </span>
         </div>

@@ -68,7 +68,7 @@ const EditBookForm = ({ id, title, author }: EditBookFormProps) => {
   };
 
   return (
-    <form className=" flex-1 flex flex-col items-center justify-center w-full">
+    <form className="flex-1 flex flex-col items-center justify-center w-full text-black">
       <label htmlFor="title" className="max-w-sm w-full">
         <input
           type="text"
@@ -76,7 +76,7 @@ const EditBookForm = ({ id, title, author }: EditBookFormProps) => {
           value={bookTitle}
           onChange={(e) => setBookTitle(e.target.value)}
           placeholder="Book Title"
-          className="text-center rounded-md my-2 p-2 w-full border border-gray-700"
+          className="text-center rounded-md my-2 p-2 w-full border border-blue-500 outline-blue-500"
         />
       </label>
       <label htmlFor="author" className="max-w-sm w-full">
@@ -86,12 +86,12 @@ const EditBookForm = ({ id, title, author }: EditBookFormProps) => {
           value={bookAuthor}
           onChange={(e) => setBookAuthor(e.target.value)}
           placeholder="author name"
-          className="text-center rounded-md my-2 p-2 w-full border border-gray-700"
+          className="text-center rounded-md my-2 p-2 w-full border border-blue-500 outline-blue-500"
         />
       </label>
       <button
         type="submit"
-        className="max-w-sm w-full bg-green-600 text-white px-4 py-2 rounded-md"
+        className="max-w-sm w-full bg-blue-700 text-white px-4 py-2 rounded-md"
         onClick={handleBookEdit}
       >
         Update Book
