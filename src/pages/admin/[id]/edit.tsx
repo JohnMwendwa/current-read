@@ -1,10 +1,10 @@
-import React from "react";
 import type { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import Book from "lib/db/models/book_model";
 import { Types } from "mongoose";
 
 import EditBookForm, { EditBookFormProps } from "components/EditBookForm";
+import connectDB from "lib/db/connection";
 
 const EditPage = (props: EditBookFormProps) => {
   const router = useRouter();
@@ -38,6 +38,8 @@ export const getServerSideProps: GetServerSideProps = async (contx) => {
       },
     };
   }
+
+  await connectDB();
   const bookData = await Book.findById(id);
 
   if (!bookData) {
