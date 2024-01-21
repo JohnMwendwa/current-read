@@ -5,6 +5,8 @@ import { Types } from "mongoose";
 import connectDB from "lib/db/connection";
 import Book from "lib/db/models/book_model";
 import { authOptions } from "../auth/[...nextauth]";
+import { sendEmail } from "lib/emails/send-email";
+import { randomCongratulationMessage } from "lib/emails/congrats-message";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getServerSession(req, res, authOptions);
@@ -71,6 +73,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       // Update book finish date
       const book = await Book.findById(id);
       book.end ? (book.end = null) : (book.end = new Date());
+
+      if (book.end !== null) {
+        const message = randomCongratulationMessage(book.title);
+        await sendEmail({
+          to: process.env.EMAIL_NAME,
+          subject: "Congratulations John 🎉",
+          html: message,
+        });
+      }
+
       await book.save();
 
       return res.status(201).json({
